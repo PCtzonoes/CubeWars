@@ -5,16 +5,34 @@ using UnityEngine;
 public class ShooterComp : MonoBehaviour
 {
     [SerializeField]
-    private Transform _spawnPoint;
+    protected Transform _spawnPoint;
 
     [SerializeField]
-    private int _damange;
+    protected Transform _headAxisPoint;
 
     [SerializeField]
-    private GameObject _bullet;
+    protected int _damange;
+
+    [SerializeField]
+    protected GameObject _bullet;
+    protected float _heightPoint;
+
+
+    private void Awake()
+    {
+        _heightPoint = _headAxisPoint.position.y;
+    }
 
     public void Fire()
     {
-        Instantiate(_bullet, _spawnPoint);
+        Instantiate(_bullet, _spawnPoint.position, _spawnPoint.rotation);
+    }
+
+    public void LookAtUnit(Transform target)
+    {
+        Vector3 pos = target.position;
+        pos.y = _heightPoint;
+        pos -= _headAxisPoint.position;
+        _headAxisPoint.transform.rotation = Quaternion.LookRotation(pos, Vector3.up);
     }
 }

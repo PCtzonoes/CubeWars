@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
+
 [RequireComponent(typeof(ShooterComp))]
 public abstract class Unit : MonoBehaviour
 {
@@ -14,12 +14,11 @@ public abstract class Unit : MonoBehaviour
     [SerializeField]
     protected float _moveSpeed = 5;
 
-    protected Rigidbody _rigidBody;
+
     protected ShooterComp _sc;
 
     private void Awake()
     {
-        _rigidBody = GetComponent<Rigidbody>();
         _sc = GetComponent<ShooterComp>();
     }
 
