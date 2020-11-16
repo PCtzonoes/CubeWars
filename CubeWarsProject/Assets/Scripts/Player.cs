@@ -17,22 +17,27 @@ public class Player : Unit
 
     private Rigidbody _rigidBody;
 
-    private void Awake()
+
+    protected override void Awake()
     {
+        _sc = GetComponent<ShooterComp>();
         _rigidBody = GetComponent<Rigidbody>();
         PlayerUnit = this;
     }
 
-    private void Update()
+    private void Start()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            _sc.Fire();
-        }
-
-        ReadInput();
+        GameManager.singleton.UpdateHealthPoints(_life);
     }
 
+    private void Update()
+    {
+        if (_alive)
+        {
+            PlayerShoot();
+            ReadInput();
+        }
+    }
 
     private void FixedUpdate()
     {
@@ -40,10 +45,33 @@ public class Player : Unit
          _rigidBody.velocity.y, _inputZ * _moveSpeed);
     }
 
+    private void PlayerShoot()
+    {
+        if (Input.GetKey(KeyCode.Space))
+        {
+            _sc.FireOnMove(_rigidBody.velocity);
+        }
+    }
 
     private void ReadInput()
     {
         _inputX = Input.GetAxis("Horizontal");
         _inputZ = Input.GetAxis("Vertical");
+    }
+
+    public override void ApplyDamange(int amount)
+    {
+        base.ApplyDamange(amount);
+        GameManager.singleton.UpdateHealthPoints(_life);
+    }
+
+    protected override void Death()
+    {
+        if (_alive)
+        {
+            Time.timeScale = 0.1f;
+            _alive = false;
+            GameManager.singleton.GameLose();
+        }
     }
 }

@@ -14,18 +14,49 @@ public class ShooterComp : MonoBehaviour
     protected int _damange;
 
     [SerializeField]
+    protected float _fireRate = 3;
+
+    [SerializeField]
     protected GameObject _bullet;
+    [SerializeField]
+    protected BulletLayer _origin = BulletLayer.ProjectileEnemies;
+
     protected float _heightPoint;
+    private float _timer;
 
 
-    private void Awake()
+    public enum BulletLayer
     {
-        _heightPoint = _headAxisPoint.position.y;
+        ProjectileEnemies = 9,
+        ProjectilePlayer = 11
     }
 
-    public void Fire()
+    protected virtual void Awake()
     {
-        Instantiate(_bullet, _spawnPoint.position, _spawnPoint.rotation);
+        _heightPoint = _headAxisPoint.position.y;
+        _timer = Time.time;
+    }
+
+
+    public virtual void Fire()
+    {
+        if (_timer + _fireRate < Time.time)
+        {
+            GameObject temp = Instantiate(_bullet, _spawnPoint.position, _spawnPoint.rotation);
+            temp.layer = (int)_origin;
+            _timer = Time.time;
+        }
+    }
+
+    public void FireOnMove(Vector3 velocity)
+    {
+        if (_timer + _fireRate < Time.time)
+        {
+            Bullet bullet = Instantiate(_bullet, _spawnPoint.position, _spawnPoint.rotation).GetComponent<Bullet>();
+            bullet.AddVelocity(velocity);
+            bullet.gameObject.layer = (int)_origin;
+            _timer = Time.time;
+        }
     }
 
     public void LookAtUnit(Transform target)
