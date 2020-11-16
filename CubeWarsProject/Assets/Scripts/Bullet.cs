@@ -22,14 +22,23 @@ public class Bullet : MonoBehaviour
         if (amount > 0) _damange = amount;
     }
 
-
+    public void AddVelocity(Vector3 vel)
+    {
+        _rigidBody.velocity += vel * 0.35f;
+        if (_rigidBody.velocity.magnitude < _moveSpeed)
+        {
+            _rigidBody.velocity *= 1.5f;
+        }
+    }
 
     private void OnCollisionEnter(Collision other)
     {
-        Unit otherUnit = other.gameObject.GetComponent<Unit>();
+        Debug.Log(other.gameObject.name);
+        Unit otherUnit = other.gameObject.GetComponentInParent<Unit>();
         if (otherUnit != null)
         {
             otherUnit.ApplyDamange(_damange);
+            Destroy(gameObject);
         }
     }
 }

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 7535328220496800452}
   - component: {fileID: 5594054809603663439}
   - component: {fileID: 1466501927281593120}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _life: 100
-  _moveSpeed: 100
+  _moveSpeed: 5
   _targetPoint: {fileID: 5163073976670315570}
 --- !u!114 &1466501927281593120
 MonoBehaviour:
@@ -165,7 +165,9 @@ MonoBehaviour:
   _spawnPoint: {fileID: 2513733820442237926}
   _headAxisPoint: {fileID: 5163073976670315570}
   _damange: 10
+  _fireRate: 0.5
   _bullet: {fileID: 400325435794388130, guid: 2e59bdb7dcd170f45a8e19080a2fcb91, type: 3}
+  _origin: 11
 --- !u!1 &2513733820207820371
 GameObject:
   m_ObjectHideFlags: 0
@@ -178,7 +180,7 @@ GameObject:
   - component: {fileID: 2513733820207820372}
   - component: {fileID: 2513733820207820373}
   - component: {fileID: 2513733820207820370}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -226,7 +228,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 00de2547c3a41e84e81ae5eb505505ab, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -272,7 +274,7 @@ GameObject:
   - component: {fileID: 2513733820250294486}
   - component: {fileID: 2513733820250294487}
   - component: {fileID: 2513733820250294484}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Cannon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -287,7 +289,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2513733820250294482}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.015561712, z: 1.28}
+  m_LocalPosition: {x: 0, y: 0.015561712, z: 1.34}
   m_LocalScale: {x: 0.4, y: 0.44462228, z: 1.2}
   m_Children: []
   m_Father: {fileID: 2513733820353691819}
@@ -354,7 +356,7 @@ GameObject:
   - component: {fileID: 2513733820353691816}
   - component: {fileID: 2513733820353691817}
   - component: {fileID: 2513733820353691814}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -404,7 +406,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: d6579bf0acd1e874999d3eae02de4b3b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -448,7 +450,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2513733820442237926}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
@@ -463,7 +465,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2513733820442237927}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.017784663, z: 1.874}
+  m_LocalPosition: {x: 0, y: -0.017784663, z: 2.164}
   m_LocalScale: {x: 2, y: 2.2231114, z: 2}
   m_Children: []
   m_Father: {fileID: 2513733820353691819}
@@ -478,7 +480,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5163073976670315570}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: HeadAxis
   m_TagString: Untagged
   m_Icon: {fileID: 0}

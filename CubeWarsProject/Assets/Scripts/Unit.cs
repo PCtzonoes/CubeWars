@@ -13,23 +13,27 @@ public abstract class Unit : MonoBehaviour
 
     [SerializeField]
     protected float _moveSpeed = 5;
-
+    protected bool _alive = true;
 
     protected ShooterComp _sc;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         _sc = GetComponent<ShooterComp>();
     }
 
-    public void ApplyDamange(int amount)
+    public virtual void ApplyDamange(int amount)
     {
         _life -= amount;
-        if (amount <= 0) Death();
+        if (_life <= 0)
+        {
+            Death();
+            _life = 0;
+        }
     }
 
     protected virtual void Death()
     {
-        throw new NotImplementedException();
+        Destroy(gameObject);
     }
 }

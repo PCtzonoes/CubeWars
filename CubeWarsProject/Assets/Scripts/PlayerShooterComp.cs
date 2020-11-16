@@ -5,9 +5,9 @@ public class PlayerShooterComp : ShooterComp
     private Vector3 _mouseInput;
     private int _layerMask;
 
-    private void Awake()
+    protected override void Awake()
     {
-        _heightPoint = _headAxisPoint.position.y;
+        base.Awake();
         _layerMask = LayerMask.GetMask("Floor");
     }
 
@@ -24,8 +24,6 @@ public class PlayerShooterComp : ShooterComp
 
             if (pos.magnitude > 2.75f)
                 _headAxisPoint.transform.rotation = Quaternion.LookRotation(pos, Vector3.up);
-
-
         }
     }
 

@@ -14,10 +14,10 @@ TagManager:
   - 
   - 
   - Floor
-  - 
-  - 
-  - 
-  - 
+  - ProjectileEnemies
+  - Enemie
+  - ProjectilePlayer
+  - Player
   - 
   - 
   - 
