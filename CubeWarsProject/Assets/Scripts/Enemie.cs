@@ -1,12 +1,16 @@
 using UnityEngine;
 
+
 public class Enemie : Unit
 {
     public static int EnemiesCount = 0;
 
     [SerializeField]
     private int _points = 5;
-
+    [SerializeField]
+    private float _deathSpeed = 5;
+    [SerializeField]
+    private Collider _collider;
 
     private float timer;
     private Transform target;
@@ -20,12 +24,14 @@ public class Enemie : Unit
 
     private void Update()
     {
-        _sc.LookAtUnit(target);
+        if (_alive)
+            _sc.LookAtUnit(target);
     }
 
     private void FixedUpdate()
     {
-        ShootPlayer();
+        if (_alive)
+            ShootPlayer();
     }
 
     private void ShootPlayer()
@@ -44,12 +50,33 @@ public class Enemie : Unit
                 GameManager.singleton.Victory();
             }
             GameManager.singleton.UpdateScore(_points);
-            base.Death();
+            DeathAnim();
         }
     }
 
     public static void ResetEnemieCount()
     {
         EnemiesCount = 0;
+    }
+
+    private void DeathAnim()
+    {
+        if (_alive == false)
+        {
+            gameObject.layer = 0;
+            Rigidbody rb = gameObject.AddComponent<Rigidbody>();
+            _collider.enabled = true;
+            rb.interpolation = RigidbodyInterpolation.Interpolate;
+            rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+            rb.useGravity = true;
+            rb.velocity = ((transform.position - target.position).normalized * 2.5f);
+            rb.velocity = new Vector3(rb.velocity.x, _deathSpeed, rb.velocity.z);
+            Destroy(gameObject, 4);
+        }
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        Debug.Log(other.gameObject.name);
     }
 }

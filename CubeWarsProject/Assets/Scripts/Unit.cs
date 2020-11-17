@@ -27,6 +27,7 @@ public abstract class Unit : MonoBehaviour
         _life -= amount;
         if (_life <= 0)
         {
+
             Death();
             _life = 0;
         }

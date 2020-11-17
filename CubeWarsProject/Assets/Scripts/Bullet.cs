@@ -33,7 +33,7 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        Debug.Log(other.gameObject.name);
+
         Unit otherUnit = other.gameObject.GetComponentInParent<Unit>();
         if (otherUnit != null)
         {
